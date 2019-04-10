@@ -22,7 +22,10 @@ function App() {
       <Input
         defaultValue={query}
         placeholder={"Looking for something?"}
-        onBlur={({ target: { value } }) => setQuery(value)}
+        onBlur={({ target: { value } }) => {
+          setMagnet();
+          setQuery(value);
+        }}
       />
 
       {magnet && <Video controls={true} id="stream" />}
