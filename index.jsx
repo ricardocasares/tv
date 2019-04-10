@@ -30,7 +30,7 @@ function App() {
 
       {magnet && <Video controls={true} id="stream" />}
 
-      {loading && <h1>Loading</h1>}
+      {loading && <h1 style={{ textAlign: "center" }}>. . .</h1>}
 
       {!loading && (
         <List>
