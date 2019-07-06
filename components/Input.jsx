@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const Input = styled.input`
+export const Input = styled.input`
   color: #333;
   border: none;
   background: #000;
@@ -9,10 +9,9 @@ const Input = styled.input`
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 1px;
+  width: 100%;
 
   :focus {
     color: #fff;
   }
 `;
-
-export default Input;

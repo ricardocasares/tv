@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 
-export default styled.video`
+export const Video = styled.video`
   width: 100%;
+  height: 100%;
 `;

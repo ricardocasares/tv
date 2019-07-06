@@ -1,52 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { render } from "react-dom";
 import { Global } from "@emotion/core";
-
-import reset from "./lib/reset";
-import Video from "./components/Video";
-import Input from "./components/Input";
-import Layout from "./components/Layout";
-import List, { Item } from "./components/List";
-
-import useSearch from "./lib/effects/search";
-import useWebTorrent from "./lib/effects/webtorrent";
+import { reset } from "./css/reset";
+import { Layout } from "./components/Layout";
+import { Loader } from "./components/Loader";
+import { Player } from "./components/Player";
+import { Search } from "./components/Search";
+import { Results } from "./components/Results";
+import { useSearch } from "./hooks/effects/search";
 
 function App() {
-  const [magnet, setMagnet] = useWebTorrent();
+  const [magnet, setMagnet] = useState();
   const { query, torrents, loading, setTorrents, setQuery } = useSearch();
+
+  function onSubmitHandler(query) {
+    setQuery(query);
+  }
+
+  function onClickHandler(magnet) {
+    setTorrents([]);
+    setMagnet(magnet);
+  }
+
+  useEffect(() => {
+    setMagnet();
+    setTorrents([]);
+  }, [query]);
 
   return (
     <Layout>
       <Global styles={reset} />
-
-      <Input
-        defaultValue={query}
-        placeholder={"Looking for something?"}
-        onBlur={({ target: { value } }) => {
-          setMagnet();
-          setQuery(value);
-        }}
-      />
-
-      {magnet && <Video controls={true} id="stream" />}
-
-      {loading && <h1 style={{ textAlign: "center" }}>. . .</h1>}
-
-      {!loading && (
-        <List>
-          {torrents.map(({ title, magnet }, i) => (
-            <Item
-              key={i}
-              onClick={() => {
-                setTorrents([]);
-                setMagnet(magnet);
-              }}
-            >
-              {title}
-            </Item>
-          ))}
-        </List>
-      )}
+      <Search onSubmit={onSubmitHandler} />
+      <Loader loading={loading} />
+      {magnet && <Player magnet={magnet} />}
+      <Results results={torrents} onClick={onClickHandler} />
     </Layout>
   );
 }

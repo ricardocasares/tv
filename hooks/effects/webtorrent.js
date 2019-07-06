@@ -1,24 +1,21 @@
 import WebTorrent from "webtorrent";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-const client = new WebTorrent();
-
-export function useWebTorrent() {
-  const [magnet, setMagnet] = useState();
-
+export function useWebTorrent(magnet) {
   useEffect(() => {
     if (!magnet) return;
+
+    const client = new WebTorrent();
 
     console.log("adding magnet");
     client.add(
       magnet,
       {
-        announce: ["wss://enigmatic-gorge-81634.herokuapp.com"]
+        announce: ["wss://enigmatic-gorge-81634.herokuapp.com/"]
       },
       function(torrent) {
         console.log("magnet added!");
         const file = torrent.files.find(file => file.name.endsWith(".mp4"));
-
         file.renderTo("#stream");
       }
     );
@@ -26,12 +23,13 @@ export function useWebTorrent() {
     return () => {
       console.log("removing magnet", magnet);
       client.remove(magnet, err => {
+        if (err) console.error(err);
         console.log("magnet", magnet, "removed");
+        client.destroy(err => {
+          if (err) console.error(err);
+          console.log("client destroyed");
+        });
       });
     };
   }, [magnet]);
-
-  return [magnet, setMagnet];
 }
-
-export default useWebTorrent;

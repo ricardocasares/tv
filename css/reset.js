@@ -1,6 +1,6 @@
 import { css } from "@emotion/core";
 
-export default css`
+export const reset = css`
   *,
   *::after,
   *::before {
@@ -18,7 +18,7 @@ export default css`
   html,
   body,
   #root {
-    height: 100vh;
+    height: 100%;
   }
 
   body {

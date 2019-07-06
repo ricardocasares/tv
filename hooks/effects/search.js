@@ -16,7 +16,7 @@ export function useSearch(text) {
         "content-type": "application/json"
       },
       body: JSON.stringify({
-        query: `query { torrents(query: "${query}", providers: [EXTRATORRENT,TORRENTZ2]) { title magnet }}`
+        query: `query { torrents(query: "${query}", providers: [EXTRATORRENT,TORRENTZ2]) { title magnet peers seeds size }}`
       })
     })
       .then(r => r.json())
@@ -28,5 +28,3 @@ export function useSearch(text) {
 
   return { query, torrents, loading, setTorrents, setQuery };
 }
-
-export default useSearch;

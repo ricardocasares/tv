@@ -9,7 +9,6 @@ export const List = styled.ul`
 export const Item = styled.li`
   padding: 15px;
   font-size: 18px;
+  display: flex;
   border-bottom: 1px solid #222;
 `;
-
-export default List;
