@@ -6,3 +6,5 @@ export const Player = ({ magnet }) => {
   useWebTorrent(magnet);
   return <Video id="stream" controls={true} autoPlay={true} />;
 };
+
+export default Player;

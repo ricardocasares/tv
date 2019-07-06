@@ -18,7 +18,7 @@ const FlexItem = styled(Item)`
     white-space: nowrap;
   }
 
-  > div:first-child {
+  > div:first-of-type {
     flex-grow: 1;
     margin-left: 0;
     white-space: nowrap;
