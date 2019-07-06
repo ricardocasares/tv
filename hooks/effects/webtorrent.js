@@ -11,11 +11,18 @@ export function useWebTorrent(magnet) {
     client.add(
       magnet,
       {
-        announce: ["wss://enigmatic-gorge-81634.herokuapp.com/"]
+        announce: [
+          "wss://tracker.sloppyta.co",
+          "wss://tracker.fastcast.nz",
+          "wss://tracker.btorrent.xyz",
+          "wss://tracker.webtorrent.io",
+          "wss://tracker.openwebtorrent.com"
+        ]
       },
       function(torrent) {
         console.log("magnet added!");
         const file = torrent.files.find(file => file.name.endsWith(".mp4"));
+        console.log(file);
         file.renderTo("#stream");
       }
     );
