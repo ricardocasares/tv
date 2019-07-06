@@ -12,18 +12,16 @@ const FlexItem = styled(Item)`
   border-color: rgba(0, 0, 0, 0.7);
 
   > div {
-    padding: 0;
-    margin-left: 15px;
+    padding: 15px;
     display: inline-block;
     white-space: nowrap;
   }
 
   > div:first-of-type {
     flex-grow: 1;
-    margin-left: 0;
+    cursor: pointer;
     white-space: nowrap;
-    overflow: scroll;
-    text-overflow: ellipsis;
+    overflow: hidden;
   }
 `;
 
@@ -34,8 +32,8 @@ export const Results = ({ results, onClick }) => {
     <Overlay>
       <List>
         {results.map(({ title, magnet, peers, seeds, size }, i) => (
-          <FlexItem key={i} onClick={onClickHandler(magnet)}>
-            <div>{title}</div>
+          <FlexItem key={i}>
+            <div onClick={onClickHandler(magnet)}>{title}</div>
             <div>
               {seeds}&uarr; {peers}&darr;
             </div>
