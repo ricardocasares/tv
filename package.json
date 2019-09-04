@@ -51,6 +51,6 @@
     "@emotion/styled": "^10.0.10",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "webtorrent": "^0.104.0"
+    "webtorrent": "^0.107.6"
   }
 }
